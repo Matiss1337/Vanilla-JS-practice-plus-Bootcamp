@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Muli:wght@400;700&display=swap');
+ /* imports font from google */
+
+* {
+    box-sizing: border-box;
+}
+
+/* makes sure that when u add padding etc, doesnt change the width */
+
+body {
+    font-family: 'Muli';
+    display: flex;
+    /* allows flexibility */
+    flex-direction: column;
+    /* directs flex box verticaly */
+    align-items: center;
+    /* centers items */
+    justify-content: center;
+    height: 100vh;
+    /* centers content, but wont work without height setup */
+    overflow: hidden;
+    /* hides scrollbars */
+    margin: 0;
+    background-color: steelblue;
+    color: white;
+}
+
+.container {
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 20px 40px;
+    border-radius: 10px;
+}
+
+.container h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.container a {
+    text-decoration: none;
+    /* no underline for the link */
+    color: lightblue;
+}
+
+.btn {
+    cursor: pointer;
+    display: inline-block;
+    width: 100%;
+    background: lightblue;
+    padding: 15px;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 16px;
+    border: 0;
+}
+
+.btn:focus {
+    outline: 0;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+/* on click becomes smaller, pretty cool */
+
+.text {
+    margin-top: 30px;
+}
+
+.form-control {
+    position: relative;
+    margin: 20px 0 40px;
+    width: 300px;
+}
+
+.form-control input {
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px white solid;
+    display: block;
+    /* seperate block in line */
+    width: 100%;
+    padding: 15px 0;
+    font-size: 18px;
+    color: white;
+}
+
+.form-control input:focus, .form-control input:valid {
+    outline: 0;
+    /* no border when selected and writing in the field */
+    border-bottom-color: lightblue;
+}
+
+.form-control label {
+    position: absolute;
+    top: 15px;
+    left: 0;
+}
+
+.form-control label span {
+    display: inline-block;
+    font-size: 18px;
+    min-width: 5px;
+    transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    /* not linear transition, but transition with 4 points so its more bouncy lets say */
+}
+
+
+.form-control input:focus + label span {
+    color: lightblue;
+    transform: translateY(-30px);
+}

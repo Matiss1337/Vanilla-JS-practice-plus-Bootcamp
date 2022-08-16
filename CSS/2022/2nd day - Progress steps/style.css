@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Muli:wght@400;700&display=swap');
+ /* imports font from google */
+
+
+:root {
+    --line-border-fill: #3498db;
+    --line-border-empty: rgb(209, 198, 198);
+}
+/* root is higher in priority as html */
+/* defined variables can be used in defining rules like var(--line-border-empty) */
+/* so can define 1 color as primamry lets say and use it on many rules */
+
+* {
+    box-sizing: border-box;
+}
+
+/* makes sure that when u add padding etc, doesnt change the width */
+
+body {
+    background-color: #f6f7fb ;
+    font-family: 'Muli';
+    display: flex;
+    /* allows flexibility */
+    align-items: center;
+    /* centers items */
+    justify-content: center;
+    height: 100vh;
+    /* centers content, but wont work without height setup */
+    overflow: hidden;
+    /* hides scrollbars */
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    /* centered text */
+}
+
+.progress-container {
+display: flex;
+justify-content: space-between;
+/* uses all the space in the div and add space in between */
+position: relative;
+margin-bottom: 30px;
+/* added marging under div */
+max-width: 100%;
+width: 350px;
+}
+
+.progress {
+    background-color: #3498db;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    /* positions line in the middle verticaly */
+    height: 4px;
+    width: 0%;
+    /* width changes how long the line is and height adjusts the thickness */
+    z-index: -1;
+    /* puts the line behind numbers */
+    transition: 0.4s ease
+    /* transitions line slower on click */
+}
+
+
+.progress-container::before {
+    content: '';
+    /* need this if using :before to display content */
+    background-color: var(--line-border-empty);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    /* positions line in the middle verticaly */
+    height: 8px;
+    width: 100%;
+    /* width changes how long the line is and height adjusts the thickness */
+    z-index: -1;
+    /* puts the line behind numbers */
+}
+
+.circle {
+    background-color: white;
+    color: var(--line-border-empty);
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* last 3 lines centers circle in div */
+    border: 3px solid var(--line-border-empty);
+    /* add border around number */
+    transition: 0.4s ease;
+}
+
+.circle.active {
+    border-color: var(--line-border-fill);
+}
+
+.btn {
+    background-color: var(--line-border-fill);
+    color: white;
+    border: 0;
+    border-radius: 6px;
+    cursor: pointer;
+    /* pointer looks like hand on hover */
+    font-family: inherit;
+    padding: 8px 30px;
+    /* expand the button by 8px top and bottom, 30 on both sides */
+    margin: 5px;
+    /* creates more space between buttoms */
+    font-size: 14px;
+}
+
+.btn:active {
+    transform: scale(0.98);
+    /* on click will change scale so its more reactive  */
+}
+
+.btn:focus {
+    outline: 0;
+}
+
+.btn:disabled {
+    background-color: var(--line-border-empty);
+    cursor: not-allowed;
+}

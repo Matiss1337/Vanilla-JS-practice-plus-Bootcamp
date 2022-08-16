@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+ /* imports font from google */
+
+* {
+    box-sizing: border-box;
+}
+
+/* makes sure that when u add padding etc, doesnt change the width */
+
+body {
+    font-family: 'Lato';
+    overflow-x: hidden;
+    /* hides horizontal scrollbar*/
+    background-color: #333;
+    color: #222;
+    margin: 0;
+}
+
+.container {
+    background-color: #fafafa;
+    transform-origin: top left;
+    /* set the point container rotates from */
+    transition: transform 0.5s linear;
+    /* moving speed, linear means its in same speed */
+    width: 100vw;
+    min-height: 100vw;
+    /* extends it to whole page, hiding body */
+    padding: 50px;
+}
+
+.container.show-nav {
+    transform: rotate(-20deg)
+    /* rotates the container div */
+}
+
+.circle-container {
+    position: fixed;
+    top: -100px;
+    left: -100px;
+}
+
+.circle {
+    background-color: #ff7979;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    /* so basicaly you move it off the page, make a square touching visible body and then round it */
+    position: relative;
+    transition: transform 0.5s linear;
+    /* transition on transition and time */
+}
+
+.container.show-nav .circle {
+    transform: rotate(-70deg);
+}
+/* when container has show-nav class circle rotates */
+
+.circle button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 100px;
+    background: transparent;
+    border: 0;
+    font-size: 26px;
+    color: white;
+    cursor: pointer;
+}
+/* position buttom and fixes borders etc */
+
+.circle button:focus {
+    outline: none;
+}
+/* when button is clicked it wont be highlited */
+
+.circle button#open {
+    left: 60%;
+}
+
+.circle button#close {
+    top: 60%;
+    transform: rotate(90deg);
+    transform-origin: top left;
+}
+
+.container.show-nav + nav li {
+transform: translateX(0);
+transition-delay: 0.3s;
+}
+/* originaly off the body, bur when show nav class active it slides in to original set place */
+
+.content img {
+    max-width: 100%;
+    /* make sure the img ist larger than screen */
+}
+.content {
+    max-width: 1000px;
+    margin: 50px auto;
+    /* auto makes sure its gona be in the middle, cool */
+}
+
+.content h1 {
+    margin: 0;
+}
+.content small {
+    color: #555;
+    font-style: italic;
+}
+
+.content p {
+    color: #333;
+    line-height: 1.5;
+    /* more space between the lines */
+}
+
+
+nav {
+   position: fixed; 
+   bottom: 40px;
+   left: 0;
+   z-index: 100;
+}
+
+nav ul {
+list-style: none;
+/* got rid of points in list */
+padding-left: 30px;
+}
+
+nav ul li {
+    text-transform: uppercase;
+    color: white;
+    margin: 40px;
+    transform: translateX(-110%);
+    /* original place off the body, so by transition it slides in */
+    transition: transform 0.4s ease-in;
+}
+
+nav ul li i {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+nav ul li + li {
+    margin-left: 60px;
+    transform: translateX(-150%);
+}
+
+nav ul li + li + li {
+    margin-left: 75px;
+    transform: translateX(-200%);
+}
+
+/* move the li to the right, looks better */

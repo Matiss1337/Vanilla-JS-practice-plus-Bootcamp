@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Muli&display=swap');
+ /* imports font from google */
+
+* {
+    box-sizing: border-box;
+}
+
+/* makes sure that when u add padding etc, doesnt change the width */
+
+body {
+    font-family: 'Muli';
+    display: flex;
+    /* allows flexibility */
+    align-items: center;
+    /* centers items */
+    justify-content: center;
+    height: 100vh;
+    /* centers content, but wont work without height setup */
+    overflow: hidden;
+    /* hides scrollbars */
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    /* makes all the children of container flexible in a row */
+    justify-content: center;
+    /* centers children in container */
+    width: 90vw;
+}
+
+.panel {
+    background-size:auto 100%;
+    /* shows the whole picture */
+    background-position: center;
+    background-repeat: no-repeat;
+    /* so the picture doesnt copy */
+    height: 80vh;
+    border-radius: 40px;
+    color: white;
+    /* color of text */
+    cursor:pointer ;
+    /* changes mouse to hand symbol on hover */
+    flex: 1;
+    /* size of childern in flex */
+    margin: 10px;
+    /* creates margin around children */
+    position: relative;
+    /* text position */
+    transition: flex 0.7s ease-in;
+    /* on activation transitions */
+}
+
+.panel h3 {
+    /* targets h3 in panel class */
+    font-size: 24px;
+    position: absolute;
+    bottom: 20px;
+    /* 20px from bottom */
+    left: 20px;
+    opacity: 0;
+    /* makes invisible */
+    
+}
+
+.panel.active {
+    flex: 3;
+}
+ /* when child in container active it becomes larger */
+.panel.active h3 {
+    opacity: 1;
+    transition: opacity 0.3s ease-in 0.4s;
+    /* when active fades in 0.3 sec after 0.3 sec */
+}
+/* text is shown when active */
+
+@media(max-width: 800px) {
+    .container {
+        width: 100vW;
+        /* makes container larger o smaller screens */
+    }
+    .panel:nth-of-type(4), .panel:nth-of-type(5) {
+        display: none;
+        /* hides some children in container on small screens */
+    }
+}

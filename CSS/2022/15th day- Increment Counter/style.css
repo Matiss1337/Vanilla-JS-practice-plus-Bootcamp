@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+ /* imports font from google */
+
+* {
+    box-sizing: border-box;
+}
+
+/* makes sure that when u add padding etc, doesnt change the width */
+
+body {
+    background-color: #8e44ad;
+    color: white;
+    font-family: 'Roboto+mono';
+    display: flex;
+    /* allows flexibility */
+    align-items: center;
+    /* centers items */
+    justify-content: center;
+    height: 100vh;
+    /* centers content, but wont work without height setup */
+    overflow: hidden;
+    /* hides scrollbars */
+    margin: 0;
+    font-size: 24px;
+}
+
+.counter-container{
+display: flex;
+flex-direction: column;
+justify-content: center;
+text-align: center;
+margin: 30px 50px;
+}
+
+.counter{
+    font-size: 60px;
+    margin-top: 10px;
+}
+
+@media(max-width:580px) {
+    body{
+       flex-direction: column; 
+    }
+}
