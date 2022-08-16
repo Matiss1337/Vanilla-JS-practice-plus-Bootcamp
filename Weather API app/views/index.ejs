@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather app</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="compass-icon">
+                <img class="icon" src="/public/icons/icon.jpg" alt="">
+            </div>
+        </header>
+        <div class="weather-title">
+            <h1>Weather Simply</h1>
+            <p>View the current weather for your city</p>
+        </div>
+        <form action="/" method="post">
+            <input type="text" name="city" placeholder="Enter city" class="ghost-input">
+        </form>
+        <div class="result">
+            <h1 class="temp">23.9</h1>
+            <div class="icon-des">
+                <img class="result-icon" src="http://openweathermap.org/img/w/04d.png" alt="">
+                <h3>broken clouds</h3>
+            </div>
+            <p class="city">Stockholm</p>
+        </div>
+
+    </div>
+</body>
+
+</html>

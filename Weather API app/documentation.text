@@ -1,0 +1,51 @@
+https://api.openweathermap.org/data/2.5/weather?q=Stockholm&units=metric&appid=3f5c7f4669bdbc486c9ff65870f65aee
+
+api for Weather in Stockholm, current weather
+
+npm init
+npm i express
+npm i ejs
+npm i ejs-mate
+
+copy  in package.json
+"scripts": {
+    "start":"node app",
+    "dev":"nodemon app"
+  },
+then 
+npm run dev 
+
+create folder public and inside folder icons
+put an icon jpeg inside
+
+create css folder in public, create styles.css file
+in index.ejs under title in head make link to styles
+
+style css
+///
+app.use(express.urlencoded({ extendet: true}))
+
+app.post('/', (req, res) => {
+    console.log(req.body)
+})
+///
+now when entering city name i get it back in log 
+
+
+///
+app.post('/', (req, res) => {
+    const city = req.body.city;
+    const urlApi = `https://api.openweathermap.org/data/2.5/weather?q=%{city}&units=metric&appid=3f5c7f4669bdbc486c9ff65870f65aee`;
+fetch(urlApi)
+.then(res => res.json())
+.then(data => console.log(data));
+})
+///
+
+npm install node-fetch@2
+///
+const fetch = require('node-fetch');
+///
+
+
+
