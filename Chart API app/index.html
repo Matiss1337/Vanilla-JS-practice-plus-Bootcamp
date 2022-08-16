@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch2</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <!-- chart.js1 first get CDN link -->
+</head>
+
+<body>
+
+    <canvas id="chart" width="400" height="400">
+        <!-- chart.js2 create canvass with id etc -->
+
+    </canvas>
+
+    <script>
+
+        // chart.js8 made these global for some reason so i can push in them 
+        chartIt();
+
+        async function chartIt() {
+
+            const data = await getData();
+            // restructuring4 created a data const so i can acall from it 
+            // chart.js7 made charti async function and put getdata() with await to make sure data lodas before the chart
+            // chart.js3 importet exsample
+            const ctx = document.getElementById('chart').getContext('2d');
+            // chart.js4 create labels const to add to later
+            const myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.xs,
+                    // restructuring 5 renamed call value to data.xs and data ys so its called properly when pushed and awaited 
+                    // chart.js5 conected vizualization (color etc) with labels
+                    datasets: [{
+                        label: 'Combined Land-Surface Air and Sea-Surface Water Temperature C°',
+                        data: data.ys,
+                        // chart.js8 chart will nuw use array pushed as data 
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            ticks: {
+                                // Include a dollar sign in the ticks
+                                callback: function (value, index, ticks) {
+                                    return value + '°';
+                                    // restructuring last added '°' symbol to ticks 
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+
+
+        // 5th call the function 
+
+        async function getData() {
+            const xs = [];
+            const ys = [];
+            // restructuring1 moved arrays to push inside get data function, renamed then 
+
+            // 1st make function 
+            const response = await fetch('ZonAnn.Ts+dSST.csv');
+            // 2nd await response 
+            const data = await response.text();
+            // 3rd transfer to text or whaterver u want, exsample json, text etc
+            // console.log(data);
+            // 4th consoleLog your data
+
+            const table = data.split('\n').slice(1);
+            table.forEach(row => {
+                const columns = row.split(',');
+                const year = columns[0];
+                const temp = columns[1];
+                xs.push(year);
+                // restructuring2 renamed labesls and years to xs and ys so they push to right place 
+                // chart.js6 adding years to labels 
+                ys.push(parseFloat(temp) + 14);
+                // chart.js10 added parseFloat so the string is parsed as number and added 14 wich is the average temp from that period
+                // chart.js9 pushes temp data into array so it can be pushed in to chart, 3 previous steps
+                console.log(year + temp);
+            })
+            return { xs, ys };
+            // restructuring3 returned xs and ys so chart can use them, but they stay in the function and are not Global so there is no risk of problems with sharing later  
+        };
+
+
+    </script>
+
+</body>
+
+</html>
