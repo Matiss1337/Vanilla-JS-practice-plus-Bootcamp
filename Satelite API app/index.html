@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch JSON and displaying on Leaflet map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <style>
+        #issMap {
+            height: 400px;
+        }
+    </style>
+    <!-- leaflet3 added inline style for map, without creating css file -->
+    <!-- leaflet1 added link to css  -->
+</head>
+
+<body>
+    <h1>Where is ISS?</h1>
+    <p>latitude: <span id="lat"></span>°<br />
+        longitude: <span id="lon"></span>°</p>
+
+    <div id="issMap"></div>
+    <!-- leaflet2 added div with id -->
+
+
+
+    <script>
+        const issIcon = L.icon({
+            iconUrl: 'iss.png',
+            iconSize: [50, 32],
+            iconAnchor: [25, 16],
+        });
+        // added icon and added it to const marker by documentation
+        const map = L.map('issMap').setView([0, 0], 2);
+        const marker = L.marker([0, 0], { icon: issIcon }).addTo(map);
+        const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+        const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
+        const tiles = L.tileLayer(tileUrl, { attribution });
+        tiles.addTo(map);
+
+        // leaflet4 shebang to display map
+
+
+        const apiUrl = 'https://api.wheretheiss.at/v1/satellites/25544';
+        // fetchApi1 create variable to use for fetching as url
+
+        let firstTime = true;
+
+
+        async function getISS() {
+            const response = await fetch(apiUrl);
+            const data = await response.json();
+            const { latitude, longitude } = data;
+            marker.setLatLng([latitude, longitude]);
+            if (firstTime) {
+                map.setView([latitude, longitude], 3);
+                firstTime = false;
+            }
+            // first time function prevent from zooming to station after the initial call of a function
+            document.getElementById('lat').textContent = latitude.toFixed(2);
+            document.getElementById('lon').textContent = longitude.toFixed(2);
+            // adding data to span 
+            // added toFixed(2) to decrease the amount pf decimals we see on lon lat
+
+            // this updates marker variable for leaflet and woalaa!
+
+            // ! just created variables from lat lon and called them in console log, so i dont have to call the data.lot etc
+        }
+        // fetchApi2 create async function to fetch data using url variable then working the response as json (u can use text or blob etc)
+        getISS();
+        // fetchApi3 call the function
+
+        setInterval(getISS, 1000);
+
+    </script>
+</body>
+
+</html>
